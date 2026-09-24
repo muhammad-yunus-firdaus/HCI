@@ -1,0 +1,204 @@
+:root {
+    color-scheme: light;
+}
+html.dark {
+    color-scheme: dark;
+}
+body { 
+    font-family: 'Inter', sans-serif; 
+    transition: background-color 0.5s, color 0.5s; 
+    background-color: #050505; 
+    color: #fff; 
+    height: 100vh; 
+    height: 100dvh; 
+    overflow: hidden; 
+}
+.light { 
+    background-color: #f5f5f7; 
+    color: #1f2024; 
+}
+
+#sidebar-progress {
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+.sidebar-collapsed {
+    width: 80px !important;
+}
+
+#sidebar-backdrop {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#sidebar-backdrop.backdrop-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.scroll-locked {
+    overflow: hidden !important;
+}
+
+@media (max-width: 767px) {
+    #sidebar-progress {
+        display: flex;
+        position: fixed;
+        inset: 0 auto 0 0;
+        height: 100dvh;
+        width: 18rem;
+        transform: translateX(-110%);
+        z-index: 80;
+        box-shadow: 20px 0 60px rgba(0,0,0,0.35);
+    }
+    #sidebar-progress.sidebar-open {
+        transform: translateX(0);
+    }
+
+    #chat-input {
+        font-size: 16px;
+    }
+}
+
+#chat-input-wrapper {
+    transition: padding-left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+#sidebar-progress.sidebar-collapsed + div #chat-input-wrapper {
+    padding-left: 80px !important;
+}
+
+.sidebar-collapsed h2, 
+.sidebar-collapsed .sidebar-text-content {
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    display: none;
+}
+.sidebar-collapsed .sidebar-item-container {
+    justify-content: center;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.glass { 
+    background: rgba(255, 255, 255, 0.03); 
+    backdrop-filter: blur(20px); 
+    border: 1px solid rgba(255, 255, 255, 0.08); 
+    border-radius: 2.5rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+.light .glass { 
+    background: rgba(255, 255, 255, 0.7); 
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.05); 
+    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+}
+.btn-monochrome {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid #ccc;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+}
+.dark input[type="checkbox"] { border-color: rgba(255,255,255,0.3); }
+input[type="checkbox"]:checked {
+    background-color: #000;
+    border-color: #000;
+}
+.dark input[type="checkbox"]:checked {
+    background-color: #fff;
+    border-color: #fff;
+}
+input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    color: #fff;
+    font-size: 1rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.dark input[type="checkbox"]:checked::after { color: #000; }
+
+.btn-monochrome:disabled {
+    opacity: 1;
+    background-color: #e5e5e5 !important;
+    color: #999 !important;
+    cursor: not-allowed;
+    border: 1px solid #d4d4d4;
+}
+.dark .btn-monochrome:disabled {
+    background-color: #1a1a1a !important;
+    color: #555 !important;
+    border-color: #2a2a2a;
+}
+.input-monochrome {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.2s;
+    color: #fff;
+}
+.input-monochrome option {
+    background-color: #111;
+    color: #fff;
+}
+.light .input-monochrome {
+    background: #fff;
+    border: 1px solid #d1d5db;
+    color: #111;
+}
+.light .input-monochrome option {
+    background-color: #fff;
+    color: #111;
+}
+.input-monochrome:focus {
+    border-color: currentColor;
+    outline: none;
+    box-shadow: 0 0 0 1px currentColor;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #e5e7eb;
+    border-radius: 10px;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #333;
+}
+
+/* Hide scrollbar utility class */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+
+/* ============================================================
+   Chat Bubble: User message — preservasi baris baru dari textarea
+   ============================================================ */
+.chat-bubble-user {
+    white-space: pre-wrap;   /* tampilkan \n sebagai baris baru */
+    word-break: break-word;  /* pecah kata panjang agar tidak overflow */
+}
+
+/* Chat Bubble: Error AI response */
+.chat-bubble-error {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
